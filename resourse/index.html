@@ -21,7 +21,7 @@
         background-color: black;
         color: white;
         border: none;
-        padding: 20px 12px;
+        padding: 10px 8px;
         cursor: pointer;
      }
     </style>
@@ -38,6 +38,7 @@
     </center>
     <center>
         <div class="background" id="button">
+            <button type="button" id="button" onclick="execCmd('bold')"><b> <img src="bold-xxl.png" width ="10" height="10"></b></button>
     
            
         </div>
@@ -47,8 +48,14 @@
 
     </div>
     <script>
-
-    </script>
+        const editor = document.getElementById('banner');
+ 
+     function execCmd(command, value = null) {
+     document.execCommand(command, false, value);
+     saveState();
+    }
+ 
+     </script>
     
     
 </body>

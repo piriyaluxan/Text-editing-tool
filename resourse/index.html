@@ -21,14 +21,14 @@
         background-color: black;
         color: white;
         border: none;
-        padding: 8px 12px;
+        padding: 8px 10px;
         cursor: pointer;
      }
      .button{
         background-color: black;
         color: white;
         border: none;
-        padding: 7px 15px;
+        padding: 3px 15px;
         cursor: pointer;
      }
     </style>
@@ -49,12 +49,21 @@
             <button type="button" id="button" onclick="execCmd('underline')"><u><img src="format_underline_white_192x192.png" width="20" height="13" ></u></button>    
             <button type="button" id="button" onclick="execCmd('italic')"><i><img src="italic-xxl.png" width="10" height="12" ></i></button>
             <input type="color" class="button" id="font-color">
+            <button type="button" id="button" onclick="alignText('left')"><img src="left.png" width="11" height="13" ></button>
+            <button type="button" id="button" onclick="alignText('center')"><img src="center.png" width="10" height="13" ></button>
+            <button type="button" id="button" onclick="alignText('right')"><img src="right.png" width="11" height="13" ></button>
+            <button type="button" id="button" onclick="alignText('justify')"><img src="justify.png" width="11" height="13" ></button>
 
 
 
         </div>
     </center>
     <div id="banner" contenteditable="true">
+        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+        The point of using Lorem Ipsum is that it has a more-of-less normal distribution of letters,as opposed to using 'Content here',
+        making it look like readable English.Many desktop publishing packages and web page editors now use Lorem Ipsum as their default 
+        module text,and a search for'lorem Ipsum' will uncover many web sites still in their infancy.Various version have evolved over the 
+        years,sometimes by accident,sometimes on purpose(injected humor and the like).
         
 
     </div>
@@ -68,6 +77,15 @@
     fontcolor.addEventListener('input', () => {
         execCmd('forecolor',fontcolor.value);
     });
+
+    function alignText(align) {
+    if (align === 'justify') {
+        document.execCommand('justifyFull', false, null);
+    } else {
+        document.execCommand('justify' + align, false, null);
+    }
+    saveState();
+    }
   
     </script>
     

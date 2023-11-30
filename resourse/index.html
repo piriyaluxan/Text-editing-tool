@@ -21,7 +21,14 @@
         background-color: black;
         color: white;
         border: none;
-        padding: 10px 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+     }
+     .button{
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 7px 15px;
         cursor: pointer;
      }
     </style>
@@ -38,9 +45,13 @@
     </center>
     <center>
         <div class="background" id="button">
-            <button type="button" id="button" onclick="execCmd('bold')"><b> <img src="bold-xxl.png" width ="10" height="10"></b></button>
-            <button type="button" id="button" onclick="execCmd('underline')"><u><img src="format_underline_white_192x192.png" width="15" height="10" ></u></button>    
-            <button type="button" id="button" onclick="execCmd('italic')"><i><img src="italic-xxl.png" width="10" height="10" ></i></button>
+            <button type="button" id="button" onclick="execCmd('bold')"><b> <img src="bold-xxl.png" width ="10" height="12"></b></button>
+            <button type="button" id="button" onclick="execCmd('underline')"><u><img src="format_underline_white_192x192.png" width="20" height="13" ></u></button>    
+            <button type="button" id="button" onclick="execCmd('italic')"><i><img src="italic-xxl.png" width="10" height="12" ></i></button>
+            <input type="color" class="button" id="font-color">
+
+
+
         </div>
     </center>
     <div id="banner" contenteditable="true">
@@ -48,14 +59,17 @@
 
     </div>
     <script>
-        const editor = document.getElementById('banner');
- 
-     function execCmd(command, value = null) {
-     document.execCommand(command, false, value);
-     saveState();
+    const editor = document.getElementById('banner');
+    function execCmd(command, value = null) {
+        document.execCommand(command, false, value);
+        saveState();
     }
- 
-     </script>
+    const fontcolor = document.getElementById('font-color');
+    fontcolor.addEventListener('input', () => {
+        execCmd('forecolor',fontcolor.value);
+    });
+  
+    </script>
     
     
 </body>

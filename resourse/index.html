@@ -21,14 +21,14 @@
         background-color: black;
         color: white;
         border: none;
-        padding: 8px 10px;
+        padding: 8px 11px;
         cursor: pointer;
      }
      .button{
         background-color: black;
         color: white;
         border: none;
-        padding: 3px 15px;
+        padding: 3px 12px;
         cursor: pointer;
      }
     </style>
@@ -48,11 +48,16 @@
             <button type="button" id="button" onclick="execCmd('bold')"><b> <img src="bold-xxl.png" width ="10" height="12"></b></button>
             <button type="button" id="button" onclick="execCmd('underline')"><u><img src="format_underline_white_192x192.png" width="20" height="13" ></u></button>    
             <button type="button" id="button" onclick="execCmd('italic')"><i><img src="italic-xxl.png" width="10" height="12" ></i></button>
+
             <input type="color" class="button" id="font-color">
+
             <button type="button" id="button" onclick="alignText('left')"><img src="left.png" width="11" height="13" ></button>
             <button type="button" id="button" onclick="alignText('center')"><img src="center.png" width="10" height="13" ></button>
             <button type="button" id="button" onclick="alignText('right')"><img src="right.png" width="11" height="13" ></button>
             <button type="button" id="button" onclick="alignText('justify')"><img src="justify.png" width="11" height="13" ></button>
+
+            <button type="button" id="button" onclick="undo()"><img src="undo-4-32.png" width="11" height="13" ></button>
+            <button type="button" id="button" onclick="redo()"><img src="action-redo-32.png" width="11" height="13" ></button>
 
 
 
@@ -68,6 +73,10 @@
 
     </div>
     <script>
+
+    let undoStack = [];
+    let redoStack = [];
+
     const editor = document.getElementById('banner');
     function execCmd(command, value = null) {
         document.execCommand(command, false, value);
@@ -86,10 +95,31 @@
     }
     saveState();
     }
-  
+
+   
+
+    function saveState() {
+      const content = editor.innerHTML;
+      undoStack.push(content);
+    }
+
+    function undo() {
+      if (undoStack.length > 1) {
+        redoStack.push(undoStack.pop());
+        const content = undoStack[undoStack.length - 1];
+        editor.innerHTML = content;
+      }
+    }
+
+    function redo() {
+      if (redoStack.length > 0) {
+        const content = redoStack.pop();
+        editor.innerHTML = content;
+        undoStack.push(content);
+      }
+    }
     </script>
-    
-    
+
 </body>
 <!-- Author: [Piriyaluxan] | [CT/2019/035] -->
 </html>
